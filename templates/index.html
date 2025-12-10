@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Internship Detector</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            background: #1e1e1e;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.7);
+        }
+        h1 {
+            text-align: center;
+            color: #00eaff;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        select, textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: none;
+            background: #2b2b2b;
+            color: white;
+            font-size: 15px;
+        }
+        textarea {
+            height: 120px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00eaff;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00c2d1;
+        }
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .fake {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        .legit {
+            background-color: #4dff88;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Data Science Internship Fake Detector</h1>
+
+    <form method="POST">
+
+        <!-- LOCATION -->
+        <label>Location</label>
+        <select name="location" required>
+            <option value="US">US</option>
+            <option value="IN">India</option>
+            <option value="UK">UK</option>
+            <option value="CA">Canada</option>
+            <option value="Remote">Remote</option>
+        </select>
+
+        <!-- TELECOMMUTING -->
+        <label>Is Telecommuting (Remote Work)?</label>
+        <select name="telecommuting" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <!-- DESCRIPTION -->
+        <label>Internship Description</label>
+        <textarea name="description" required placeholder="Paste the internship description here..."></textarea>
+
+        <!-- REQUIREMENTS -->
+        <label>Requirements</label>
+        <textarea name="requirements" required placeholder="Skills, tools, experience required..."></textarea>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result {% if prediction == 'FAKE' %}fake{% else %}legit{% endif %}">
+        <h2>{{ prediction }}</h2>
+        <p>Probability: <strong>{{ probability }}%</strong></p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
